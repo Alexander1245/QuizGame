@@ -29,5 +29,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         binding.radioGroup.setOnCheckedChangeListener { _, difficulty ->
             viewModel.setDifficulty(difficulty)
         }
+        binding.buttonStart.setOnClickListener {
+            viewModel.startQuiz()
+        }
     }
 }
