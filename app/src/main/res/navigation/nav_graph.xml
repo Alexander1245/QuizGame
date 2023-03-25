@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.dart69.quizgame.home.presentation.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_quizFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.dart69.quizgame.quiz.presentation.QuizFragment"
-        android:label="fragment_quiz"
+        android:label="Quiz"
         tools:layout="@layout/fragment_quiz" >
         <argument
             android:name="difficulty"
@@ -29,6 +29,6 @@
     <fragment
         android:id="@+id/storeFragment"
         android:name="com.dart69.quizgame.store.presentation.StoreFragment"
-        android:label="fragment_store"
+        android:label="Wallpaper store"
         tools:layout="@layout/fragment_store" />
 </navigation>
