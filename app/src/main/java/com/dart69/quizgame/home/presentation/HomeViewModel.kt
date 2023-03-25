@@ -4,6 +4,7 @@ import androidx.annotation.IdRes
 import androidx.lifecycle.viewModelScope
 import com.dart69.quizgame.R
 import com.dart69.quizgame.common.coroutines.AvailableDispatchers
+import com.dart69.quizgame.common.domain.models.Difficulty
 import com.dart69.quizgame.common.presentation.BaseViewModel
 import com.dart69.quizgame.common.presentation.NavigateEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,22 +18,39 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeViewModel.State, NavigateEvent>(State.INITIAL) {
 
     fun setDifficulty(@IdRes difficulty: Int) {
-        states.update { it.copy(selectedDifficulty = difficulty) }
+        states.update {
+            it.copy(
+                difficulty = when(difficulty) {
+                    R.id.radioSimple -> Difficulty.EASY
+                    R.id.radioMedium -> Difficulty.MEDIUM
+                    R.id.radioHard -> Difficulty.HARD
+                    else -> throw IllegalArgumentException("Illegal id $difficulty")
+                }
+            )
+        }
     }
 
     fun startQuiz() {
         viewModelScope.launch(dispatchers.main) {
-            events.emit(NavigateEvent(HomeFragmentDirections.actionHomeFragmentToQuizFragment()))
+            val directions = HomeFragmentDirections.actionHomeFragmentToQuizFragment(states.value.difficulty)
+            events.emit(NavigateEvent(directions))
+        }
+    }
+
+    fun goToStore() {
+        viewModelScope.launch(dispatchers.main) {
+            val directions = HomeFragmentDirections.actionHomeFragmentToStoreFragment()
+            events.emit(NavigateEvent(directions))
         }
     }
 
     data class State(
-        @IdRes val selectedDifficulty: Int,
+        val difficulty: Difficulty,
         val currentScore: Int,
     ) {
         companion object {
             val INITIAL = State(
-                selectedDifficulty = R.id.itemSimple,
+                difficulty = Difficulty.EASY,
                 currentScore = 0,
             )
         }

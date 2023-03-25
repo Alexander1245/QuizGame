@@ -3,7 +3,6 @@ package com.dart69.quizgame.home.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dart69.quizgame.R
@@ -19,10 +18,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.observeStates().collectWithLifecycle(viewLifecycleOwner) {
-            binding.textViewTitle.text = getString(R.string.current_score, it.currentScore)
-            println(it)
-        }
+
         viewModel.observeEvents().collectWithLifecycle(viewLifecycleOwner) {
             it.apply(findNavController())
         }
@@ -31,6 +27,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         }
         binding.buttonStart.setOnClickListener {
             viewModel.startQuiz()
+        }
+        binding.buttonStore.setOnClickListener {
+            viewModel.goToStore()
         }
     }
 }

@@ -7,4 +7,11 @@ data class QuizStats(
     init {
         require(points >= 0) { "A count of the points can't be a negative number." }
     }
+
+    companion object {
+        val INITIAL = QuizStats(
+            quiz = Quiz("", emptyList(), ""),
+            points = 0,
+        )
+    }
 }

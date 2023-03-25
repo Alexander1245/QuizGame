@@ -1,8 +1,8 @@
-package com.dart69.quizgame
+package com.dart69.quizgame.main.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
+import com.dart69.quizgame.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

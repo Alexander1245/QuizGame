@@ -13,19 +13,22 @@
         <action
             android:id="@+id/action_homeFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/quizFragment"
-        android:name="com.dart69.quizgame.QuizFragment"
-        android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" >
         <action
-            android:id="@+id/action_quizFragment_to_storeFragment"
+            android:id="@+id/action_homeFragment_to_storeFragment"
             app:destination="@id/storeFragment" />
     </fragment>
     <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.dart69.quizgame.quiz.presentation.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <argument
+            android:name="difficulty"
+            app:argType="com.dart69.quizgame.common.domain.models.Difficulty" />
+    </fragment>
+    <fragment
         android:id="@+id/storeFragment"
-        android:name="com.dart69.quizgame.StoreFragment"
+        android:name="com.dart69.quizgame.store.presentation.StoreFragment"
         android:label="fragment_store"
         tools:layout="@layout/fragment_store" />
 </navigation>
