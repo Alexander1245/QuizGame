@@ -9,6 +9,8 @@
 
 вопросы и тд можно добавить непосредственно в код
 
+**На разработку ушло 8 часов**
+
 <table>
   <tr>
     <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227719007-21e541b7-318c-4930-bf3c-c8ebd0e82812.png"></td>
