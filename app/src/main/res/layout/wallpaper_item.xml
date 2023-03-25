@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    android:elevation="@dimen/elevation">
+
+    <LinearLayout
+        android:layout_width="@dimen/wallpaper_width"
+        android:layout_height="@dimen/wallpaper_height"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <ImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/imageViewWallpaper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/wallpaper"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/imageIsBought"
+                android:src="@drawable/ic_bought"
+                android:contentDescription="@string/wallpaper_is_bought"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                app:tint="@color/teal_700"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/small_spacing"/>
+        </FrameLayout>
+
+        <Button
+            android:layout_marginHorizontal="@dimen/small_spacing"
+            android:id="@+id/buttonBuy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="93" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
