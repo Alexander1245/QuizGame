@@ -1,5 +1,6 @@
 package com.dart69.quizgame.store.data
 
+import com.dart69.quizgame.common.coroutines.AvailableDispatchers
 import com.dart69.quizgame.common.data.PointsDataSource
 import com.dart69.quizgame.store.domain.WallpaperRepository
 import com.dart69.quizgame.store.presentation.models.WallpaperItem
@@ -11,13 +12,14 @@ import javax.inject.Inject
 class WallpaperRepositoryImpl @Inject constructor(
     private val pointsSource: PointsDataSource,
     private val wallpaperSource: WallpaperDataSource,
+    private val dispatchers: AvailableDispatchers,
 ) : WallpaperRepository {
     private val points = MutableStateFlow(pointsSource.getPoints())
 
     override fun observeWallpapers(): Flow<List<WallpaperItem>> =
         wallpaperSource.observeAll().combine(points) { wallpapers, points ->
             wallpapers.map { it.toItem(points) }
-        }
+        }.flowOn(dispatchers.io)
 
     override fun observePoints(): Flow<Int> = points.asStateFlow()
 

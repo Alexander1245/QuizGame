@@ -32,8 +32,7 @@ sealed class ContextEvents {
             val manager = WallpaperManager.getInstance(context.applicationContext)
             val stream = context.contentResolver.openInputStream(Uri.parse(imageUri))
             val message = try {
-                val bitmap = Drawable.createFromStream(stream, imageUri)?.toBitmap()
-                manager.setBitmap(bitmap)
+                manager.setStream(stream)
                 R.string.wallpapers_successfully_set
             } catch (e: IOException) {
                 R.string.cant_set_wallpaper
