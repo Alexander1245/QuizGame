@@ -18,11 +18,10 @@ import kotlin.time.Duration.Companion.seconds
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
+    pointsRepository: PointsRepository,
     private val timerLauncher: SingleTimerLauncher,
     private val quizRepository: QuizRepository,
-    private val pointsRepository: PointsRepository,
-) : BaseViewModel<QuizViewModel.State, Nothing>(State.INITIAL), SingleTimerLauncher.Callbacks,
-    QuizRepository.Callbacks {
+) : BaseViewModel<QuizViewModel.State, Nothing>(State.INITIAL), SingleTimerLauncher.Callbacks {
     private val total = QuizFragmentArgs
         .fromSavedStateHandle(savedStateHandle)
         .difficulty
@@ -37,7 +36,7 @@ class QuizViewModel @Inject constructor(
     }
 
     fun answerTheQuestion(message: String) {
-        quizRepository.tryAnswer(message, this)
+        quizRepository.tryAnswer(message)
     }
 
     override fun onTick(duration: Duration) {
@@ -46,10 +45,6 @@ class QuizViewModel @Inject constructor(
 
     override fun onFinish() {
         quizRepository.loadNextQuiz()
-    }
-
-    override fun onCorrectAnswer(answer: String) {
-        pointsRepository.increment()
     }
 
     override fun onCleared() {

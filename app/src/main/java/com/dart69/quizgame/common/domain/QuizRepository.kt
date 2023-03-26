@@ -6,11 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface QuizRepository {
     fun observeQuizzes(): Flow<Quiz>
 
-    fun tryAnswer(answer: String, callbacks: Callbacks)
+    fun tryAnswer(answer: String)
 
     fun loadNextQuiz()
-
-    interface Callbacks {
-        fun onCorrectAnswer(answer: String)
-    }
 }

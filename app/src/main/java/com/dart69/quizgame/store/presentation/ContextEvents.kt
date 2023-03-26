@@ -3,12 +3,13 @@ package com.dart69.quizgame.store.presentation
 import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.widget.Toast
-import androidx.core.graphics.drawable.toBitmap
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.dart69.quizgame.R
-import java.io.IOException
 
 sealed class ContextEvents {
     abstract fun applyOn(context: Context)
@@ -30,16 +31,20 @@ sealed class ContextEvents {
         @SuppressLint("ResourceType")
         override fun applyOn(context: Context) {
             val manager = WallpaperManager.getInstance(context.applicationContext)
-            val stream = context.contentResolver.openInputStream(Uri.parse(imageUri))
-            val message = try {
-                manager.setStream(stream)
-                R.string.wallpapers_successfully_set
-            } catch (e: IOException) {
-                R.string.cant_set_wallpaper
-            } finally {
-                stream?.close()
-            }
-            ShowToastEvent(message).applyOn(context)
+            Glide.with(context)
+                .asBitmap()
+                .load(imageUri)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        manager.setBitmap(resource)
+                        ShowToastEvent(R.string.wallpapers_successfully_set).applyOn(context)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {}
+                })
         }
     }
 }

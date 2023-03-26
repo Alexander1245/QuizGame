@@ -9,10 +9,10 @@ interface QuizzesDataSource {
     fun getCurrentQuiz(): Quiz
 
     class FakeDataSource @Inject constructor() : QuizzesDataSource {
-        private var index = 0;
+        private var index = 0
 
         override fun getNextQuiz(): Quiz {
-            if (index + 1 >= QUIZZES.size) index = 0
+            if (index + 1 >= QUIZZES.size) index = -1
             return QUIZZES[++index]
         }
 
