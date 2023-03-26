@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface WallpaperRepository {
     fun observeWallpapers(): Flow<List<WallpaperItem>>
 
-    fun observePoints(): Flow<Int>
-
     suspend fun initialize()
 
     suspend fun buyWallpaper(item: WallpaperItem)

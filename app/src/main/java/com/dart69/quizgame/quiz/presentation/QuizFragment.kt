@@ -23,12 +23,12 @@ class QuizFragment : BaseFragment<FragmentQuizBinding, QuizViewModel>(R.layout.f
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.observeStates().collectWithLifecycle(viewLifecycleOwner) {
-            binding.textViewQuestion.text = it.quizStats.quiz.question
+            binding.textViewQuestion.text = it.quiz.question
             binding.textViewHint.text =
-                getString(R.string.current_score_with_time_left, it.quizStats.points, it.timeLeft)
-            binding.buttonAnswer1.text = it.quizStats.quiz.answers.component1()
-            binding.buttonAnswer2.text = it.quizStats.quiz.answers.component2()
-            binding.buttonAnswer3.text = it.quizStats.quiz.answers.component3()
+                getString(R.string.current_score_with_time_left, it.points, it.timeLeft)
+            binding.buttonAnswer1.text = it.quiz.answers.component1()
+            binding.buttonAnswer2.text = it.quiz.answers.component2()
+            binding.buttonAnswer3.text = it.quiz.answers.component3()
         }
         binding.root.forEach { v ->
             if (v is Button) {

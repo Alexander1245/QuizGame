@@ -4,4 +4,8 @@ data class Quiz(
     val question: String,
     val answers: List<String>,
     val correct: String,
-)
+) {
+    companion object {
+        val INITIAL = Quiz("", emptyList(), "")
+    }
+}

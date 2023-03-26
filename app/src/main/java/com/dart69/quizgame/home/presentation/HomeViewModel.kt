@@ -4,18 +4,28 @@ import androidx.annotation.IdRes
 import androidx.lifecycle.viewModelScope
 import com.dart69.quizgame.R
 import com.dart69.quizgame.common.coroutines.AvailableDispatchers
+import com.dart69.quizgame.common.domain.PointsRepository
 import com.dart69.quizgame.common.domain.models.Difficulty
 import com.dart69.quizgame.common.presentation.BaseViewModel
 import com.dart69.quizgame.common.presentation.NavigateEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    pointsRepository: PointsRepository,
     private val dispatchers: AvailableDispatchers,
 ) : BaseViewModel<HomeViewModel.State, NavigateEvent>(State.INITIAL) {
+
+    init {
+        pointsRepository.observePoints()
+            .onEach { points -> states.update { it.copy(points = points) } }
+            .launchIn(viewModelScope)
+    }
 
     fun setDifficulty(@IdRes difficulty: Int) {
         states.update {
@@ -46,12 +56,12 @@ class HomeViewModel @Inject constructor(
 
     data class State(
         val difficulty: Difficulty,
-        val currentScore: Int,
+        val points: Int,
     ) {
         companion object {
             val INITIAL = State(
                 difficulty = Difficulty.EASY,
-                currentScore = 0,
+                points = 0,
             )
         }
     }

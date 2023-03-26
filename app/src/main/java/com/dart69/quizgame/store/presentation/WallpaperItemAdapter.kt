@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dart69.quizgame.R
 import com.dart69.quizgame.databinding.WallpaperItemBinding
 import com.dart69.quizgame.store.presentation.models.WallpaperItem
@@ -52,7 +52,10 @@ class WallpaperItemViewHolder(
     private val callbacks: WallpaperItemAdapter.Callbacks,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(wallpaper: WallpaperItem) {
-        binding.imageViewWallpaper.setImageURI(wallpaper.uri.toUri())
+        Glide.with(binding.root)
+            .load(wallpaper.uri)
+            .centerCrop()
+            .into(binding.imageViewWallpaper)
         binding.imageIsBought.isVisible = wallpaper.isBought
         binding.buttonBuy.isEnabled = wallpaper.isAvailable
         binding.buttonBuy.text = wallpaper.price.toString()

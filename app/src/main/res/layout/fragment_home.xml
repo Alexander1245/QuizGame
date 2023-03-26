@@ -9,6 +9,17 @@
     tools:context=".home.presentation.HomeFragment">
 
     <TextView
+        android:id="@+id/textViewPoints"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/medium_spacing"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        tools:text="@string/current_score"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
