@@ -9,12 +9,12 @@
 
 вопросы и тд можно добавить непосредственно в код
 
-**На разработку ушло 8 часов**
+**На разработку ушло 10-11 часов**
 
 <table>
   <tr>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227766939-b6433947-e136-4927-86dc-42a220cea06b.png"></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227766949-4faab98e-e037-4bb5-bf34-1f5405774666.png"></td>
-    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227766956-f3d2d332-29e2-4ea2-8bfc-eb6ef8fdca7e.png"></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227772262-d1c4be06-6b1c-4dba-b171-eabb09314431.png"></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227772194-febd78e1-2e95-4607-b3b9-21b77b45c95c.png"></td>
+    <td valign="top"><img src="https://user-images.githubusercontent.com/36124349/227772200-f62126dd-bc3b-442b-a889-6685605dc57f.png"></td>
   </tr>
  </table>
