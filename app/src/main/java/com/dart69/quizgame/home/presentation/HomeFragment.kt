@@ -19,9 +19,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.observeStates().collectWithLifecycle(viewLifecycleOwner) {
+            binding.textViewPoints.text = getString(R.string.current_score, it.points)
+        }
+
         viewModel.observeEvents().collectWithLifecycle(viewLifecycleOwner) {
             it.apply(findNavController())
         }
+
         binding.radioGroup.setOnCheckedChangeListener { _, difficulty ->
             viewModel.setDifficulty(difficulty)
         }

@@ -2,13 +2,14 @@ package com.dart69.quizgame.quiz.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.dart69.quizgame.common.domain.QuizGame
-import com.dart69.quizgame.common.domain.models.QuizStats
+import com.dart69.quizgame.common.domain.PointsRepository
+import com.dart69.quizgame.common.domain.QuizRepository
+import com.dart69.quizgame.common.domain.models.Quiz
 import com.dart69.quizgame.common.presentation.BaseViewModel
 import com.dart69.quizgame.common.timer.SingleTimerLauncher
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import kotlin.time.Duration
@@ -16,9 +17,10 @@ import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-    private val game: QuizGame,
-    private val timerLauncher: SingleTimerLauncher,
     savedStateHandle: SavedStateHandle,
+    pointsRepository: PointsRepository,
+    private val timerLauncher: SingleTimerLauncher,
+    private val quizRepository: QuizRepository,
 ) : BaseViewModel<QuizViewModel.State, Nothing>(State.INITIAL), SingleTimerLauncher.Callbacks {
     private val total = QuizFragmentArgs
         .fromSavedStateHandle(savedStateHandle)
@@ -27,18 +29,14 @@ class QuizViewModel @Inject constructor(
         .seconds
 
     init {
-        game.observeStats()
-            .onEach { stats ->
-                states.update { it.copy(quizStats = stats) }
-                timerLauncher.startAndCancelPrevious(total, TICK_RATE, this)
-            }
-            .launchIn(viewModelScope)
+        quizRepository.observeQuizzes().combine(pointsRepository.observePoints()) { quiz, points ->
+            states.update { it.copy(quiz = quiz, points = points) }
+            timerLauncher.startAndCancelPrevious(total, TICK_RATE, this)
+        }.launchIn(viewModelScope)
     }
 
     fun answerTheQuestion(message: String) {
-        if (game.tryAnswer(message)) {
-            timerLauncher.startAndCancelPrevious(total, TICK_RATE, this)
-        }
+        quizRepository.tryAnswer(message)
     }
 
     override fun onTick(duration: Duration) {
@@ -46,7 +44,7 @@ class QuizViewModel @Inject constructor(
     }
 
     override fun onFinish() {
-        game.loadNextQuiz()
+        quizRepository.loadNextQuiz()
     }
 
     override fun onCleared() {
@@ -55,11 +53,12 @@ class QuizViewModel @Inject constructor(
     }
 
     data class State(
-        val quizStats: QuizStats,
+        val points: Int,
+        val quiz: Quiz,
         val timeLeft: Int,
     ) {
         companion object {
-            val INITIAL = State(QuizStats.INITIAL, 0)
+            val INITIAL = State(0, Quiz.INITIAL, 0)
         }
     }
 
