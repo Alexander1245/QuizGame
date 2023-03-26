@@ -31,9 +31,9 @@ class HomeViewModel @Inject constructor(
         states.update {
             it.copy(
                 difficulty = when(difficulty) {
-                    R.id.radioSimple -> Difficulty.EASY
-                    R.id.radioMedium -> Difficulty.MEDIUM
-                    R.id.radioHard -> Difficulty.HARD
+                    R.id.chipSimple -> Difficulty.EASY
+                    R.id.chipMedium -> Difficulty.MEDIUM
+                    R.id.chipHard -> Difficulty.HARD
                     else -> throw IllegalArgumentException("Illegal id $difficulty")
                 }
             )

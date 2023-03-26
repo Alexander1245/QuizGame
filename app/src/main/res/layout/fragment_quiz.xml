@@ -22,11 +22,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-        tools:text="@string/current_score_with_time_left"/>
+        tools:text="@string/current_points_with_time_left"/>
 
-    <View
+    <ImageView
+        android:id="@+id/imageViewHint"
+        android:layout_marginVertical="@dimen/small_spacing"
         android:layout_width="match_parent"
+        android:contentDescription="@string/quiz_image_hint"
         android:layout_height="0dp"
+        tools:src="@drawable/marathon"
+        android:scaleType="centerCrop"
         android:layout_weight="1"/>
 
     <Button

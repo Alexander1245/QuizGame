@@ -9,71 +9,80 @@
     tools:context=".home.presentation.HomeFragment">
 
     <TextView
-        android:id="@+id/textViewPoints"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/textViewDifficulty"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_spacing"
+        android:text="@string/difficulty"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/medium_spacing"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        tools:text="@string/current_score"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_spacing"
-        android:text="@string/choose_difficulty"
-        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:paddingHorizontal="@dimen/small_spacing"
+        app:checkedChip="@id/chipSimple"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDifficulty"
+        app:singleLine="true"
+        app:singleSelection="true">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/buttonStart"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RadioButton
-            android:id="@+id/radioSimple"
-            android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipSimple"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/simple" />
 
-        <RadioButton
-            android:id="@+id/radioMedium"
-            android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMedium"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/medium" />
 
-        <RadioButton
-            android:id="@+id/radioHard"
-            android:layout_width="match_parent"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipHard"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hard" />
-    </RadioGroup>
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:contentDescription="@string/app_logo"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
     <Button
         android:id="@+id/buttonStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/start_quiz"
+        app:icon="@drawable/ic_play"
         app:layout_constraintBottom_toTopOf="@+id/buttonStore"
         app:layout_constraintEnd_toEndOf="@+id/buttonStore"
         app:layout_constraintStart_toStartOf="@+id/buttonStore" />
 
     <Button
         android:id="@+id/buttonStore"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_spacing"
-        android:text="@string/wallpaper_store"
+        android:text="@string/wallpapers_store"
+        android:textColor="?attr/colorPrimary"
+        app:icon="@drawable/ic_wallpaper"
+        app:iconTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dart69.quizgame.R
 import com.dart69.quizgame.common.coroutines.collectWithLifecycle
 import com.dart69.quizgame.common.presentation.BaseFragment
+import com.dart69.quizgame.common.presentation.requireActionBar
 import com.dart69.quizgame.databinding.FragmentStoreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +30,7 @@ class StoreFragment : BaseFragment<FragmentStoreBinding, StoreViewModel>(R.layou
         }
         viewModel.observeStates().collectWithLifecycle(viewLifecycleOwner) {
             binding.progressBar.isVisible = it.isInProgress
-            binding.textViewScores.text = getString(R.string.current_score, it.points)
+            requireActionBar()?.title = getString(R.string.available_points, it.points)
             adapter.submitList(it.wallpapers)
         }
         viewModel.observeEvents().collectWithLifecycle(viewLifecycleOwner) {

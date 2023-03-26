@@ -1,26 +1,28 @@
 <resources>
     <string name="app_name">QuizGame</string>
     <string name="app_name_with_author">QuizGame by Alexander1245</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="difficulty">Difficulty</string>
     <string name="simple">Simple</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
-    <string name="current_score">Current score is %1d</string>
-    <string name="current_score_with_time_left">Current score is %1d, time left %2d</string>
+    <string name="current_points">Current points: %1d</string>
+    <string name="current_points_with_time_left">Current points: %1d, time left: %2d seconds</string>
     <string name="start_quiz">Start quiz</string>
     <string name="choose_difficulty">Choose difficulty</string>
-    <string name="wallpaper_store">Wallpaper store</string>
+    <string name="wallpapers_store">Wallpapers store</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="buy">Buy</string>
     <string name="no_thanks">No, thanks</string>
     <string name="are_you_sure">Are you sure?</string>
-    <string name="points_will_be_spent">Points will be spent.</string>
+    <string name="points_will_be_spent">Points will be spent and the wallpaper will be set.</string>
     <string name="wallpaper_is_bought">Wallpaper is bought</string>
     <string name="not_enough_points">Not enough points</string>
     <string name="cant_set_wallpaper">Can\'t set the wallpaper.</string>
     <string name="wallpapers_successfully_set">Wallpapers successfully set</string>
     <string name="are_you_want_to_set_wallpaper">Are you want to set this image as a wallpaper?</string>
+    <string name="available_points">Available points: %1d</string>
     <string name="yes">Yes</string>
+    <string name="quiz_image_hint">Quiz image hint</string>
+    <string name="app_logo">App logo</string>
 </resources>

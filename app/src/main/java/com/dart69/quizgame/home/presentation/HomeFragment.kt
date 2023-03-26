@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.dart69.quizgame.R
 import com.dart69.quizgame.common.coroutines.collectWithLifecycle
 import com.dart69.quizgame.common.presentation.BaseFragment
+import com.dart69.quizgame.common.presentation.requireActionBar
 import com.dart69.quizgame.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,15 +21,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.observeStates().collectWithLifecycle(viewLifecycleOwner) {
-            binding.textViewPoints.text = getString(R.string.current_score, it.points)
+            requireActionBar()?.subtitle = getString(R.string.current_points, it.points)
         }
 
         viewModel.observeEvents().collectWithLifecycle(viewLifecycleOwner) {
             it.apply(findNavController())
         }
 
-        binding.radioGroup.setOnCheckedChangeListener { _, difficulty ->
-            viewModel.setDifficulty(difficulty)
+        binding.chipGroup.setOnCheckedStateChangeListener { _, ids ->
+            ids.firstOrNull()?.let(viewModel::setDifficulty)
         }
         binding.buttonStart.setOnClickListener {
             viewModel.startQuiz()
@@ -36,5 +37,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         binding.buttonStore.setOnClickListener {
             viewModel.goToStore()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActionBar()?.subtitle = ""
     }
 }

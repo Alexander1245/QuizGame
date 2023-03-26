@@ -41,6 +41,7 @@ interface CommonModule {
     ): SingleTimerLauncher
 
     @Binds
+    @Singleton
     fun bindQuizRepository(
         gameImpl: QuizRepositoryImpl
     ): QuizRepository
