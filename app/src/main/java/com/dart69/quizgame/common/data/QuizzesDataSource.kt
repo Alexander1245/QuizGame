@@ -1,5 +1,6 @@
 package com.dart69.quizgame.common.data
 
+import com.dart69.quizgame.R
 import com.dart69.quizgame.common.domain.models.Quiz
 import javax.inject.Inject
 
@@ -27,26 +28,31 @@ interface QuizzesDataSource {
                     question = "How long does the marathon last?",
                     answers = listOf("21.3 miles", "12.4 miles", "26.2 miles"),
                     correct = "26.2 miles",
+                    imageRes = R.drawable.marathon,
                 ),
                 Quiz(
                     question = "How many players are on the baseball team?",
                     answers = listOf("5", "7", "9"),
                     correct = "9",
+                    imageRes = R.drawable.baseball,
                 ),
                 Quiz(
                     question = "What kind of sport is considered the \"king of sports\"?",
                     answers = listOf("Football", "Tennis", "Ping-pong"),
                     correct = "Football",
+                    imageRes = R.drawable.football,
                 ),
                 Quiz(
                     question = "In what year did Amir Khan win his Olympic boxing medal?",
                     answers = listOf("2003", "1998", "2004"),
                     correct = "2004",
+                    imageRes = R.drawable.amir_khan,
                 ),
                 Quiz(
                     question = "In what sport would you have a touchdown?",
                     answers = listOf("American football", "Soccer", "Tennis"),
                     correct = "American football",
+                    R.drawable.american_football,
                 ),
             )
         }

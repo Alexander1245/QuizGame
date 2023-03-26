@@ -9,6 +9,7 @@ import com.dart69.quizgame.store.presentation.models.toWallpaper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOn
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
 class WallpaperRepositoryImpl @Inject constructor(
@@ -16,6 +17,8 @@ class WallpaperRepositoryImpl @Inject constructor(
     private val dispatchers: AvailableDispatchers,
     private val pointsRepository: PointsRepository,
 ) : WallpaperRepository {
+    private val isInitialized = AtomicBoolean(false)
+
     override fun observeWallpapers(): Flow<List<WallpaperItem>> =
         wallpaperSource.observeAll()
             .combine(pointsRepository.observePoints()) { wallpapers, points ->
@@ -24,7 +27,9 @@ class WallpaperRepositoryImpl @Inject constructor(
 
 
     override suspend fun initialize() {
-        wallpaperSource.initialize()
+        if(isInitialized.compareAndSet(false, true)) {
+            wallpaperSource.initialize()
+        }
     }
 
     override suspend fun buyWallpaper(item: WallpaperItem) {

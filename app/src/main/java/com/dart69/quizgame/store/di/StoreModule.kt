@@ -26,6 +26,7 @@ interface StoreModule {
     ): WallpaperDataSource
 
     @Binds
+    @Singleton
     fun bindRepository(
         repositoryImpl: WallpaperRepositoryImpl
     ): WallpaperRepository
